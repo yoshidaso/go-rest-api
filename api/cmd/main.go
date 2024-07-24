@@ -1,13 +1,17 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"context"
+	"github.com/o-ga09/api/internal/presenter"
+)
 
+// @title ユーザー管理サービスAPI
+// @version v0.1.0
+// @description ユーザー管理サービスAPIの機能
+// @host localhost:8080
 func main() {
-	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-	r.Run() // 0.0.0.0:8080 でサーバーを立てます。
+	srv := presenter.NewServer()
+	if err := srv.Run(context.Background()); err != nil {
+		panic(err)
+	}
 }
